@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undefined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Covered+By+Your+Grace&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div id="splash-screen-container">
+      <div id="splash-screen-title">
+        <h1>ibrahimingilizceogreniyor.online</h1>
+      </div>
+      <div class="splash-screen-dashboard">
+        <h2>EBEVEYN TAKİP RAPORLARI</h2>
+        <div class="splash-screen-dashboard-menu">
+          <h3
+            class="splash-screen-dashboard-menu-option splash-screen-dashboard-menu-option-selected"
+          >
+            BUGÜN
+          </h3>
+          <h3 class="splash-screen-dashboard-menu-option">BU HAFTA</h3>
+          <h3 class="splash-screen-dashboard-menu-option">BU AY</h3>
+        </div>
+        <div class="splash-screen-dashboard-overview">
+          <div class="splash-screen-dashboard-data"></div>
+        </div>
+        <div class="splash-screen-form-preliminary"><h3>Giriş yap!</h3></div>
+      </div>
+      <div id="splash-screen-form-container">
+        <form id="splash-screen-form">
+          <div class="splash-screen-form-item">
+            <label for="username"
+              ><img src="img/creeper.png" alt="icon"
+            /></label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="kullanıcı adı"
+              required
+            />
+          </div>
+
+          <div class="splash-screen-form-item">
+            <label for="password"
+              ><img
+                src="img/fish.png"
+                alt="icon"
+                style="transform: rotate(15deg)"
+            /></label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="şifre"
+              required
+            />
+          </div>
+
+          <button class="splash-screen-form-item" type="submit">
+            Giriş Yap
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

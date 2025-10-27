@@ -1,0 +1,355 @@
+:root {
+  --accent-color: #f4e1c1;
+  --base-color: #00558c;
+  --text-color: #b7410e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Bubblegum Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+body {
+  background-color: var(--base-color);
+}
+
+#splash-screen-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+#splash-screen-title {
+  font-family: "Covered By Your Grace", cursive;
+  font-style: normal;
+  font-size: 2rem;
+  color: var(--accent-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  animation: splash-animation-title 1.5s ease-in forwards;
+}
+
+#splash-screen-title h1 {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+@keyframes splash-animation-title {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 1;
+    top: 50%;
+  }
+  100% {
+    opacity: 1;
+    top: 40%;
+  }
+}
+
+.splash-screen-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 0;
+  gap: 0.5rem;
+  animation: splash-animation-dashboard 1s ease-in forwards;
+}
+
+@keyframes splash-animation-dashboard {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  80% {
+    top: 30%;
+    opacity: 0;
+  }
+  100% {
+    top: 50%;
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+.splash-screen-dashboard h2 {
+  padding: 1.5rem 2.25rem;
+  font-size: 4rem;
+  grid-template-rows: 1fr;
+  grid-column: 1 / 4;
+  background-color: #f4e1c1;
+  text-align: center;
+}
+
+.splash-screen-dashboard-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / 4;
+  background-color: #f4e1c1;
+}
+
+.splash-screen-dashboard-menu-option {
+  text-align: center;
+  padding: 0.5rem 0;
+  width: 33.33%;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.splash-screen-dashboard-menu-option-selected {
+  background-color: #d0e4ff;
+  color: #113946;
+}
+
+.splash-screen-dashboard-menu-option:hover {
+  background-color: #f8ebd5;
+}
+
+.splash-screen-dashboard-menu-option-selected:hover {
+  background-color: #d0e4ff;
+}
+
+.splash-screen-dashboard-overview {
+  gap: 1rem;
+  grid-column: 1 / 4;
+  width: 100%;
+  background-color: #f4e1c1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.splash-screen-dashboard-data {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  padding-bottom: 1.35rem;
+}
+
+.splash-screen-dashboard-data .circular-chart {
+  display: block;
+  margin: 10px auto;
+  width: 100%;
+  max-height: 14rem;
+  overflow: visible;
+}
+
+.splash-screen-dashboard-data .circle-bg {
+  fill: none;
+  stroke: #fa7070;
+  stroke-width: 3.6;
+}
+
+.splash-screen-dashboard-data .circle {
+  stroke-width: 3.6;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+.splash-screen-dashboard-data .percentage {
+  fill: #00558c;
+  font-family: "Bubblegum Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.55rem;
+  text-anchor: middle;
+}
+
+.splash-screen-dashboard-data .percentage-dc {
+  fill: #00558c;
+  font-family: "Bubblegum Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow: visible;
+  font-size: 0.5rem;
+  text-anchor: middle;
+}
+
+.splash-screen-dashboard-data .percentage-appr {
+  fill: #f8ebd5;
+  font-family: "Bubblegum Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow: visible;
+  font-size: 1.35rem;
+  text-anchor: middle;
+}
+
+.splash-screen-form-preliminary {
+  gap: 1rem;
+  grid-column: 1 / 4;
+  width: 100%;
+  font-size: 3rem;
+  cursor: pointer;
+  background-color: #eef5ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.splash-screen-form-preliminary:hover {
+  background-color: #deecff;
+}
+
+#splash-screen-form-container {
+}
+
+#splash-screen-form {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 0;
+  gap: 0.5rem;
+  animation: splash-animation-form 1.5s ease-in forwards;
+}
+
+@keyframes splash-animation-form {
+  0% {
+    top: 50%;
+    opacity: 0;
+  }
+  80% {
+    top: 50%;
+    opacity: 0;
+  }
+  100% {
+    top: 65%;
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+.splash-screen-form-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+}
+
+.splash-screen-form-item-formatted {
+  font-size: 1.7rem;
+  width: 25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.splash-screen-form-item-formatted h2 {
+  text-align: center;
+  color: var(--accent-color);
+}
+
+.splash-screen-form-item label {
+  width: 4rem;
+  height: 3.7rem;
+  background-color: var(--accent-color);
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 150ms;
+}
+
+.splash-screen-form-item label img {
+  overflow: hidden;
+}
+
+.splash-screen-form-item input {
+  width: inherit;
+  height: 3.7rem;
+  font: inherit;
+  font-size: larger;
+  border-radius: 0 10px 10px 0;
+  flex-grow: 1;
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: 100ms ease;
+}
+
+.splash-screen-form-item input:hover {
+  border: 2px solid var(--accent-color);
+  border-left: none;
+}
+
+.splash-screen-form-item input:focus {
+  border: 3px solid var(--accent-color);
+  border-left: none;
+  outline: none;
+}
+
+.splash-screen-form-item.error input:hover,
+.splash-screen-form-item.error input:focus {
+  border-color: var(--text-color);
+}
+
+#splash-screen-form button {
+  font: inherit;
+  font-size: larger;
+  font-weight: 600;
+  background-color: var(--accent-color);
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.85rem 0.4rem;
+  margin-top: 0.5rem;
+}
+
+#splash-screen-form button:focus {
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+
+  #splash-screen-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #splash-screen-title {
+    font-size: 4rem;
+  }
+}

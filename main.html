@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undefined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Covered+By+Your+Grace&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">
+        <a href="quiz.html">
+          <div class="quiz-box"><h2>QUIZ</h2></div>
+        </a>
+      </div>
+      <div class="item"></div>
+    </div>
+
+    <script>
+      if (sessionStorage.getItem("isLoggedIn") !== "true") {
+        window.location.href = "index.html";
+      }
+
+      let socket;
+      let reconnectInterval = 2000;
+      const baseUrl = location.hostname.includes("localhost")
+        ? "http://localhost:5000"
+        : "https://ibrahimingilizceogreniyor.online";
+
+      function connectWebSocket(user) {
+        if (
+          socket &&
+          (socket.readyState === WebSocket.OPEN ||
+            socket.readyState === WebSocket.CONNECTING)
+        ) {
+          return;
+        }
+
+        const protocol = location.protocol === "https:" ? "wss" : "ws";
+        const host = location.hostname.includes("localhost")
+          ? "localhost:5000"
+          : "ibrahimingilizceogreniyor.online";
+
+        socket = new WebSocket(`${protocol}://${host}`);
+
+        socket.addEventListener("open", () => {
+          const lastSignIn = new Date();
+          localStorage.setItem("lastSignIn", lastSignIn.toISOString());
+
+          socket.send(
+            JSON.stringify({ type: "user_connected", username: user?.username })
+          );
+        });
+
+        socket.addEventListener("close", () => {
+          console.warn(
+            "⚠️ WebSocket disconnected. Reconnecting in 2 seconds..."
+          );
+          setTimeout(() => connectWebSocket(user), reconnectInterval); // FIX: wrap connectWebSocket in a function inside setTimeout
+        });
+
+        socket.addEventListener("error", (err) => {
+          console.error("❌ WebSocket error:", err.message);
+          socket.close();
+        });
+
+        window.addEventListener("beforeunload", () => {
+          if (socket.readyState === WebSocket.OPEN) {
+            socket.send(
+              JSON.stringify({
+                action: "disconnect",
+                username: localStorage.getItem("username"),
+                message: "User has left",
+                lastSignIn: localStorage.getItem("lastSignIn"),
+                terminal: new Date().toISOString(),
+              })
+            );
+            socket.send(JSON.stringify({ type: "user_disconnected" }));
+          }
+          socket.close();
+        });
+      }
+
+      fetch(`${baseUrl}/userdata`)
+        .then((response) => response.json())
+        .then((users) => {
+          const username = localStorage.getItem("username");
+          const user = users.find((visitor) => visitor.username === username);
+
+          connectWebSocket(user);
+        })
+        .catch((err) => console.error("Failed to fetch userdata:", err));
+    </script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=NfEbwENI"></script>
+  </body>
+</html>
