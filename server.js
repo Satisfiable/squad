@@ -240,6 +240,7 @@ wss.on("connection", (ws) => {
 });
 
 async function updateUserStats(username, lastSignIn, terminal, type) {
+  username = "ibrahim";
   const user = await usersCollection.findOne({ username });
 
   function formatSecondsToTime(seconds) {
